@@ -1,0 +1,5 @@
+import type { Citation } from '../types';
+export function CitationList({ citations, onOpen }: { citations: Citation[]; onOpen?: (citation: Citation) => void }) {
+  if (!citations.length) return <p className="text-sm text-slate-500 dark:text-slate-400">No citations returned.</p>;
+  return <div className="space-y-3">{citations.map((citation, index) => <button key={citation.chunk_id} onClick={() => onOpen?.(citation)} className="w-full rounded-md border border-amber-200 bg-amber-50 p-3 text-left transition hover:-translate-y-0.5 hover:shadow-md dark:border-amber-900 dark:bg-amber-950/40"><div className="mb-1 flex flex-wrap items-center justify-between gap-2"><span className="text-sm font-semibold text-amber-900 dark:text-amber-100">[{index + 1}] {citation.filename} - page {citation.page}</span><span className="rounded bg-white px-2 py-1 text-xs text-slate-600 dark:bg-slate-900 dark:text-slate-300">score {(citation.score * 100).toFixed(0)}%</span></div><p className="text-sm leading-6 text-slate-700 dark:text-slate-200">{citation.preview}</p></button>)}</div>;
+}

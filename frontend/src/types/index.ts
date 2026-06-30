@@ -1,0 +1,10 @@
+export interface LoginResponse { access_token: string; token_type: 'bearer'; username: string; }
+export interface DocumentMetadata { id: string; filename: string; stored_filename: string; content_type: string; size_bytes: number; page_count: number; chunk_count: number; created_at: string; }
+export interface Citation { document_id: string; filename: string; page: number; chunk_id: string; score: number; preview: string; }
+export interface ConfidenceBreakdown { overall: number; retriever_score: number; llm_confidence: number; context_coverage: number; hallucination_risk: number; }
+export interface ChatResponse { id: string; question: string; answer: string; citations: Citation[]; confidence_score: number; confidence: ConfidenceBreakdown; corrected: boolean; rewritten_query: string | null; token_count: number; generation_time_ms: number; created_at: string; }
+export interface ChatHistoryItem extends ChatResponse { retrieved_documents: Array<Record<string, unknown>>; title?: string | null; feedback?: 'like' | 'dislike' | null; }
+export interface SeriesPoint { date: string; value?: number; uploads?: number; questions?: number; }
+export interface DashboardStats { total_documents: number; indexed_chunks: number; total_questions: number; storage_used_bytes: number; embedding_model: string; llm_model: string; questions_by_day: SeriesPoint[]; documents_by_day: SeriesPoint[]; storage_by_day: SeriesPoint[]; confidence_trend: SeriesPoint[]; daily_activity: SeriesPoint[]; }
+export interface UserSettings { theme: 'light' | 'dark' | 'system'; embedding_model: string; chunk_size: number; chunk_overlap: number; top_k: number; temperature: number; max_tokens: number; language: string; }
+export interface SearchResult { document_id: string; filename: string; page: number; chunk_id: string; score: number; preview: string; }

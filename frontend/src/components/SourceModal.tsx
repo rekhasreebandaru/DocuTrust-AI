@@ -1,0 +1,6 @@
+import { X } from 'lucide-react';
+import type { Citation } from '../types';
+export function SourceModal({ citation, pdfUrl, onClose }: { citation: Citation | null; pdfUrl: string | null; onClose: () => void }) {
+  if (!citation) return null;
+  return <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4"><div className="grid max-h-[90vh] w-full max-w-6xl gap-4 overflow-hidden rounded-lg border border-slate-700 bg-slate-950 p-4 text-white shadow-2xl lg:grid-cols-[1fr_420px]"><div className="min-h-[60vh] overflow-hidden rounded-md bg-slate-900">{pdfUrl ? <iframe src={pdfUrl + '#page=' + citation.page} className="h-[75vh] w-full" title="PDF preview" /> : <div className="flex h-full items-center justify-center text-slate-400">Loading PDF preview...</div>}</div><aside className="overflow-y-auto rounded-md border border-amber-700/50 bg-amber-950/30 p-4"><div className="mb-4 flex items-start justify-between gap-3"><div><h3 className="font-semibold text-amber-100">{citation.filename}</h3><p className="text-sm text-amber-200">Page {citation.page} - Similarity {Math.round(citation.score * 100)}%</p></div><button className="btn-icon" onClick={onClose}><X size={16} /></button></div><p className="rounded-md bg-amber-100 p-3 text-sm leading-6 text-slate-950">{citation.preview}</p></aside></div></div>;
+}

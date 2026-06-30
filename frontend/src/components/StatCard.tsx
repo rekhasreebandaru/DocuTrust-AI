@@ -1,0 +1,2 @@
+import type { LucideIcon } from 'lucide-react';
+export function StatCard({ label, value, icon: Icon }: { label: string; value: string | number; icon: LucideIcon }) { return <div className="panel p-5"><div className="flex items-center justify-between"><div><p className="text-sm text-slate-500 dark:text-slate-400">{label}</p><p className="mt-2 text-3xl font-bold">{value}</p></div><div className="rounded-md bg-teal-50 p-3 text-trust dark:bg-teal-950 dark:text-teal-200"><Icon size={24} /></div></div></div>; }

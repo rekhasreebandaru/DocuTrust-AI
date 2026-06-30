@@ -1,0 +1,5 @@
+import type { SeriesPoint } from '../types';
+export function MiniChart({ title, data, color = '#0f766e' }: { title: string; data: SeriesPoint[]; color?: string }) {
+  const values = data.map((point) => Number(point.value ?? point.questions ?? point.uploads ?? 0)); const max = Math.max(1, ...values);
+  return <div className="glass-panel p-5"><div className="mb-4 flex items-center justify-between"><h3 className="font-semibold">{title}</h3><span className="text-xs text-slate-500">{data.length || 1} days</span></div><div className="flex h-32 items-end gap-2">{(values.length ? values : [0]).map((value, index) => <div key={index} className="flex flex-1 flex-col items-center gap-2"><div className="w-full rounded-t-md transition-all hover:opacity-80" style={{ height: Math.max(8, (value / max) * 110) + 'px', background: color }} /><span className="text-[10px] text-slate-500">{value}</span></div>)}</div></div>;
+}

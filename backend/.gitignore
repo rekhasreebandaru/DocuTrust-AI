@@ -1,0 +1,7 @@
+__pycache__/
+.pytest_cache/
+.env.local
+uploads/*
+!uploads/.gitkeep
+chroma_store/
+*.pyc
