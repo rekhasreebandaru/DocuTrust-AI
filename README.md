@@ -122,9 +122,6 @@ Password: admin123
 
 Do not commit real API keys, MongoDB passwords, uploaded PDFs, ChromaDB data, local database files, virtual environments, or `node_modules`. This repository includes `.env.example` only for configuration reference. Rotate `JWT_SECRET` before deploying anywhere beyond localhost.
 
-## Demo Video (original project)
-
-[Watch Demo Video](https://drive.google.com/file/d/1mj6uHOPx5e6ET9fO_UrdNwmRwPD3HQM9/view?usp=sharing)
 
 ## Attribution
 
