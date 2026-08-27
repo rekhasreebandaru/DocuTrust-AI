@@ -11,7 +11,7 @@ client: AsyncIOMotorClient | None = None
 mongo_error: str | None = None
 using_local_fallback = False
 LOCAL_DB_PATH = Path('local_db.json')
-COLLECTIONS = ['documents', 'chunks', 'chat_history', 'settings', 'feedback']
+COLLECTIONS = ['documents', 'chunks', 'chat_history', 'settings', 'feedback', 'users', 'audit_log']
 
 class InsertOneResult:
     def __init__(self, inserted_id: str):
@@ -160,6 +160,8 @@ class LocalDatabase:
         self.chat_history = LocalCollection('chat_history')
         self.settings = LocalCollection('settings')
         self.feedback = LocalCollection('feedback')
+        self.users = LocalCollection('users')
+        self.audit_log = LocalCollection('audit_log')
 
 local_database = LocalDatabase()
 
@@ -182,7 +184,7 @@ async def connect_to_mongo() -> None:
         )
         await client.admin.command('ping')
         db = client[settings.mongodb_db]
-        for collection, index in [('documents', 'created_at'), ('chat_history', 'created_at'), ('chunks', 'document_id'), ('feedback', 'chat_id')]:
+        for collection, index in [('documents', 'created_at'), ('chat_history', 'created_at'), ('chunks', 'document_id'), ('feedback', 'chat_id'), ('users', 'username'), ('audit_log', 'created_at')]:
             await getattr(db, collection).create_index(index)
         mongo_error = None
         using_local_fallback = False
